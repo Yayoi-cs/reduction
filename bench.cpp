@@ -27,6 +27,7 @@ int main(void) {
     }, N_TIMES);
     printf("reduction_align_f64:  %ld ns  (sum: %A)\n", r2.count(), sum);
 
+    sum = 0.0;
     auto r3 = benchlib::measure([&]() {
         sum += reduction_align_8n_f64(p, N_OBJ);
     }, N_TIMES);
