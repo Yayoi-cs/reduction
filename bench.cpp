@@ -16,13 +16,13 @@ int main(void) {
 
     auto r1 = benchlib::measure([&]() {
         sum += reduction_align_8n_f64(p, N_OBJ);
-    }, 0x10000);
+    }, 0x1000000);
     printf("hand-rolled:  %ld ns  (sum: %A)\n", r1.count(), sum);
 
     sum = 0.0;
     auto r2 = benchlib::measure([&]() {
         sum += std::reduce(std::execution::unseq, p, p + N_OBJ);
-    }, 0x10000);
+    }, 0x1000000);
     printf("std::reduce:  %ld ns  (sum: %A)\n", r2.count(), sum);
 
     return 0;
