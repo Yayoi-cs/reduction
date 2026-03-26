@@ -1,0 +1,3 @@
+[submodule "benchlib"]
+	path = benchlib
+	url = https://github.com/Yayoi-cs/benchlib
