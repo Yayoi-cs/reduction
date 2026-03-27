@@ -16,14 +16,14 @@
 #define N_TIMES 0x1000000
 
 int main(void) {
-    for (size_t i = 0x40; i < 0x4000; i = i * 2) {
+    for (size_t i = 0x40; i < 0x8000; i = i * 2) {
         auto rand_ptr = benchlib::rand_buffer<double>(i);
         double* p = rand_ptr.get();
 
         std::vector<double> ones(i, 1.0);
 
         double sum = 0.0;
-        printf("i: %lx\n", i);
+        printf("i: 0x%lx\n", i);
 
         sum = 0.0;
         auto r1 = benchlib::measure([&]() {
@@ -60,7 +60,8 @@ int main(void) {
         double mkl_sum_result = 0.0;
         MKL_INT p_dim = 1;
         MKL_INT n_dim = (MKL_INT)i;
-        vsldSSNewTask(&task, &p_dim, &n_dim, &VSL_SS_MATRIX_STORAGE_ROWS, p, nullptr, nullptr);
+        MKL_INT storage = VSL_SS_MATRIX_STORAGE_ROWS;
+        vsldSSNewTask(&task, &p_dim, &n_dim, &storage, p, nullptr, nullptr);
         vsldSSEditTask(task, VSL_SS_ED_MEAN, &mkl_mean);
 
         sum = 0.0;
