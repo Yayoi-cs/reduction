@@ -11,11 +11,11 @@
 #ifdef AVX
 double reduction_f64(const double* data, size_t n);
 double reduction_align_f64(const double* data, size_t n);
-double reduction_align_8n_f64(const double* data, size_t n);
+double reduction_align_64n_f64(const double* data, size_t n);
 #endif
 
 #ifdef SVE
 double reduction_f64(const double* data, size_t n);
 double reduction_align_f64(const double* data, size_t n);
-double reduction_align_8n_f64(const double* data, size_t n);
+double reduction_align_64n_f64(const double* data, size_t n);
 #endif

@@ -95,7 +95,7 @@ double reduction_align_f64(const double* __restrict__ data, size_t n) {
     return _mm512_reduce_add_pd(acc0);
 }
 
-double reduction_align_8n_f64(const double* __restrict__ data, size_t n) {
+double reduction_align_64n_f64(const double* __restrict__ data, size_t n) {
     __m512d acc0 = _mm512_setzero_pd();
     __m512d acc1 = _mm512_setzero_pd();
     __m512d acc2 = _mm512_setzero_pd();
@@ -124,9 +124,6 @@ double reduction_align_8n_f64(const double* __restrict__ data, size_t n) {
     acc0 = _mm512_add_pd(acc0, acc2);
     acc1 = _mm512_add_pd(acc1, acc3);
     acc0 = _mm512_add_pd(acc0, acc1);
-
-    for (; i < n; i += 8)
-        acc0 = _mm512_add_pd(acc0, _mm512_load_pd(data + i));
 
     return _mm512_reduce_add_pd(acc0);
 }
@@ -227,7 +224,7 @@ double reduction_align_f64(const double* __restrict__ data, size_t n) {
     return svaddv_f64(ptrue, acc0);
 }
 
-double reduction_align_8n_f64(const double* __restrict__ data, size_t n) {
+double reduction_align_64n_f64(const double* __restrict__ data, size_t n) {
     svfloat64_t acc0 = svdup_f64(0.0);
     svfloat64_t acc1 = svdup_f64(0.0);
     svfloat64_t acc2 = svdup_f64(0.0);
